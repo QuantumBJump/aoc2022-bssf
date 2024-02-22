@@ -12,6 +12,7 @@ pub fn execute(input_type: &str) -> Result<(), Box<dyn error::Error>> {
     part1(lines.clone())?;
     part1_improved(lines.clone())?;
     part1_map(lines.clone())?;
+    part2(lines.clone())?;
     Ok(())
 }
 
@@ -70,3 +71,30 @@ fn part1_map(lines: Vec<String>) -> Result<(), Box<dyn error::Error>> {
     Ok(())
 }
 
+fn total_bag(lines: &[String]) -> usize {
+    let total = lines
+        .iter()
+        .map(|line| line.parse::<usize>())
+        .sum::<Result<_, _>>();
+    match total {
+        Ok(t) => t,
+        Err(e) => panic!("Error! {}", e),
+    }
+}
+
+// Part 2
+fn part2(lines: Vec<String>) -> Result<(), Box<dyn error::Error>> {
+    let start = Instant::now();
+    println!("part 2:");
+    let mut totals = lines
+        .split(|s| s.is_empty())
+        .map(total_bag)
+        .collect::<Vec<usize>>();
+    totals.sort_by(|a, b| b.cmp(a));
+    let result = totals[..3].iter().sum::<usize>();
+
+    println!("\tresult: {}", result);
+    let duration = start.elapsed();
+    println!("\ttime elapsed: {:?}", duration);
+    Ok(())
+}

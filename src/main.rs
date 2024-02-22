@@ -34,12 +34,11 @@ fn main() {
         [_] => ("01", "real"),
         [_, day] => (day.as_str(), "real"),
         [_, day, input] => (day.as_str(), input.as_str()),
-        [_, _, _, ..] => panic!("Too many arguments!")
+        [_, _, _, ..] => panic!("Too many arguments!"),
     };
     if input_arg != "real" && input_arg != "test" {
         panic!("Invalid input type {}! real or test required", input_arg);
     }
-
 
     let day: u8 = determine_day(day_arg);
     println!("Day {}, data: {}", day, input_arg);
@@ -69,7 +68,7 @@ fn main() {
         // 23 => day01::execute(),
         // 24 => day01::execute(),
         // 25 => day01::execute(),
-        _ => panic!("Couldn't execute day {day}!")
+        _ => panic!("Couldn't execute day {day}!"),
     };
     if let Err(blah) = result {
         panic!("Error! {}", blah);

@@ -16,8 +16,7 @@ pub fn get_input_path(input_type: &str, day: u8) -> String {
     let dir = match input_type {
         "test" => "test_input",
         "real" => "input",
-        _ => panic!("Fuck! That's not an input type!")
+        _ => panic!("Fuck! That's not an input type!"),
     };
     format!("{}/day{}.txt", dir, day_string)
 }
-

@@ -22,7 +22,7 @@ fn part1(lines: Vec<String>) -> Result<(), Box<dyn error::Error>> {
     let mut bag = 0;
     for line in &lines {
         // println!("line {}: {}", i, line);
-        if line == "" {
+        if line.is_empty() {
             // println!("\tbag total: {}", bag);
             highest = cmp::max(bag, highest);
             bag = 0;
@@ -41,7 +41,7 @@ fn part1(lines: Vec<String>) -> Result<(), Box<dyn error::Error>> {
 fn part1_improved(lines: Vec<String>) -> Result<(), Box<dyn error::Error>> {
     let start = Instant::now();
     let mut highest = 0;
-    for bag in lines.split(|s| s == "") {
+    for bag in lines.split(|s| s.is_empty()) {
         let mut bag_total = 0;
         for line in bag {
             bag_total += line.parse::<usize>()?;
@@ -57,10 +57,11 @@ fn part1_improved(lines: Vec<String>) -> Result<(), Box<dyn error::Error>> {
 fn part1_map(lines: Vec<String>) -> Result<(), Box<dyn error::Error>> {
     let start = Instant::now();
     let mut highest = 0;
-    for bag in lines.split(|s| s == "") {
-        let bag_total: usize = bag.into_iter()
-                .map(|line| line.parse::<usize>())
-                .sum::<Result<_, _>>()?;
+    for bag in lines.split(|s| s.is_empty()) {
+        let bag_total: usize = bag
+            .iter()
+            .map(|line| line.parse::<usize>())
+            .sum::<Result<_, _>>()?;
         highest = cmp::max(bag_total, highest);
     }
     println!("\thighest: {}", highest);

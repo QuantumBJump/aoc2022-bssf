@@ -14,9 +14,8 @@ pub fn execute(input_type: &str) -> Result<(), Box<dyn error::Error>> {
 enum Choice {
     Rock,
     Paper,
-    Scissors
+    Scissors,
 }
-
 
 #[derive(Debug)]
 enum Outcome {
@@ -49,16 +48,15 @@ impl Round {
 
     fn outcome(&self) -> Outcome {
         match (&self.you, &self.them) {
-            (Choice::Rock, Choice::Paper) |
-            (Choice::Paper, Choice::Scissors) |
-            (Choice::Scissors, Choice::Rock) => Outcome::Loss,
-            (Choice::Rock, Choice::Scissors) |
-            (Choice::Paper, Choice::Rock) |
-            (Choice::Scissors, Choice::Paper) => Outcome::Win,
+            (Choice::Rock, Choice::Paper)
+            | (Choice::Paper, Choice::Scissors)
+            | (Choice::Scissors, Choice::Rock) => Outcome::Loss,
+            (Choice::Rock, Choice::Scissors)
+            | (Choice::Paper, Choice::Rock)
+            | (Choice::Scissors, Choice::Paper) => Outcome::Win,
             (_, _) => Outcome::Draw,
         }
     }
-
 }
 
 // Part 1
@@ -74,9 +72,7 @@ fn part1(lines: Vec<String>) -> Result<(), Box<dyn error::Error>> {
     let start = Instant::now();
     println!("part 1:");
 
-    let result: usize = lines.iter()
-        .map(|l| calculate_round(l))
-        .sum();
+    let result: usize = lines.iter().map(|l| calculate_round(l)).sum();
 
     println!("\tresult: {result}");
     let duration = start.elapsed();
@@ -85,13 +81,10 @@ fn part1(lines: Vec<String>) -> Result<(), Box<dyn error::Error>> {
 }
 
 fn calculate_round(round: &str) -> usize {
-    let (them, you) = round.split_once(" ").unwrap();
+    let (them, you) = round.split_once(' ').unwrap();
     let them = convert(them);
     let you = convert(you);
-    let round = &Round{
-        them,
-        you
-    };
+    let round = &Round { them, you };
     // println!("{round:?}, outcome: {}", round.score());
     round.score()
 }

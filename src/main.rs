@@ -68,7 +68,7 @@ fn main() {
         // 23 => day01::execute(),
         // 24 => day01::execute(),
         // 25 => day01::execute(),
-        _ => panic!("Couldn't execute day {day}!"),
+        _ => panic!("day {day} does not exist (yet)!"),
     };
     if let Err(blah) = result {
         panic!("Error! {}", blah);
@@ -76,5 +76,8 @@ fn main() {
 }
 
 fn determine_day(day_arg: &str) -> u8 {
-    day_arg.parse::<u8>().unwrap()
+    match day_arg.parse::<u8>() {
+        Ok(res) => res,
+        Err(e) => panic!("Failed to parse {day_arg}: {e}")
+    }
 }

@@ -18,15 +18,15 @@ fn part1(lines: Vec<String>) -> Result<(), Box<dyn error::Error>> {
     println!("part 1:");
     let mut highest = 0;
     let mut bag = 0;
-    for line in lines.iter() {
+    for line in &lines {
         // println!("line {}: {}", i, line);
         if line == "" {
             // println!("\tbag total: {}", bag);
             highest = cmp::max(bag, highest);
             bag = 0;
-            continue;
+        } else {
+            bag += line.parse::<usize>()?;
         }
-        bag += line.parse::<usize>()?;
     }
     // println!("\tbag total: {}", bag);
     highest = cmp::max(bag, highest);

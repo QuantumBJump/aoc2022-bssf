@@ -33,16 +33,16 @@ struct Round {
 impl Round {
     fn score(&self) -> usize {
         let mut res = 0;
-        match self.you {
-            Choice::Rock => res += 1,
-            Choice::Paper => res += 2,
-            Choice::Scissors => res += 3,
-        }
-        match self.outcome() {
-            Outcome::Loss => (),
-            Outcome::Draw => res += 3,
-            Outcome::Win => res += 6,
-        }
+        res += match self.you {
+            Choice::Rock => 1,
+            Choice::Paper => 2,
+            Choice::Scissors => 3,
+        };
+        res += match self.outcome() {
+            Outcome::Loss => 0,
+            Outcome::Draw => 3,
+            Outcome::Win => 6,
+        };
         res
     }
 

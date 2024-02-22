@@ -29,27 +29,17 @@ mod day01;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
-    let day_arg: &str;
-    let input_arg: &str;
-
-    match args.len() {
-        1 => {
-            day_arg = "01";
-            input_arg = "real";
-        },
-        2 => {
-            day_arg = &args[1];
-            input_arg = "real";
-        },
-        3 => {
-            day_arg = &args[1];
-            match args[2].as_str() {
-                "test"|"real" => input_arg = &args[2],
-                _ => input_arg = "real",
-            }
-        },
-        _ => panic!("ahh"),
+    let (day_arg, input_arg) = match &args[..] {
+        [] => panic!("Too few arguments!"),
+        [_] => ("01", "real"),
+        [_, day] => (day.as_str(), "real"),
+        [_, day, input] => (day.as_str(), input.as_str()),
+        [_, _, _, ..] => panic!("Too many arguments!")
+    };
+    if input_arg != "real" && input_arg != "test" {
+        panic!("Invalid input type {}! real or test required", input_arg);
     }
+
 
     let day: u8 = determine_day(day_arg);
     println!("Day {}, data: {}", day, input_arg);

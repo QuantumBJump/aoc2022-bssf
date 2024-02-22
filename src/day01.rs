@@ -1,4 +1,5 @@
 use crate::utils;
+use itertools::Itertools;
 use std::{cmp, error, time::Instant};
 
 // Part 1
@@ -86,12 +87,14 @@ fn total_bag(lines: &[String]) -> usize {
 fn part2(lines: Vec<String>) -> Result<(), Box<dyn error::Error>> {
     let start = Instant::now();
     println!("part 2:");
-    let mut totals = lines
+
+    let result: usize = lines
         .split(|s| s.is_empty())
         .map(total_bag)
-        .collect::<Vec<usize>>();
-    totals.sort_by(|a, b| b.cmp(a));
-    let result = totals[..3].iter().sum::<usize>();
+        .sorted()
+        .rev()
+        .take(3)
+        .sum();
 
     println!("\tresult: {}", result);
     let duration = start.elapsed();

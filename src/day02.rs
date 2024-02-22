@@ -10,7 +10,7 @@ pub fn execute(input_type: &str) -> Result<(), Box<dyn error::Error>> {
     Ok(())
 }
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Clone)]
 enum Choice {
     Rock,
     Paper,
@@ -98,10 +98,52 @@ fn convert(choice: &str) -> Choice {
     }
 }
 
-fn part2(_lines: Vec<String>) -> Result<(), Box<dyn error::Error>> {
+// Part 2
+// X loss, Y draw, Z win
+
+fn calculate_play(round: &str) -> usize {
+    let (them, you) = round.split_once(' ').unwrap();
+    let them = convert(them);
+    // println!(" they chose: {them:?}");
+    let desired = get_desired_outcome(you);
+    // println!(" you want: {desired:?}");
+    let round = plan_round(&them, desired);
+
+    round.score()
+}
+
+fn plan_round(choice: &Choice, outcome: Outcome) -> Round {
+    let you: Choice = match (choice, outcome) {
+        (c, Outcome::Draw) => c.clone(), // Copy if we want to draw
+        (c, Outcome::Win) => match c {
+            Choice::Rock => Choice::Paper,
+            Choice::Paper => Choice::Scissors,
+            Choice::Scissors => Choice::Rock,
+        },
+        (c, Outcome::Loss) => match c {
+            Choice::Rock => Choice::Scissors,
+            Choice::Paper => Choice::Rock,
+            Choice::Scissors => Choice::Paper,
+        },
+    };
+    // println!("You choose: {you:?}");
+    let them = choice.clone();
+    Round { them, you }
+}
+
+fn get_desired_outcome(input: &str) -> Outcome {
+    match input {
+        "X" => Outcome::Loss,
+        "Y" => Outcome::Draw,
+        "Z" => Outcome::Win,
+        _ => panic!("Unexpected choice: {input}"),
+    }
+}
+
+fn part2(lines: Vec<String>) -> Result<(), Box<dyn error::Error>> {
     let start = Instant::now();
     println!("part 2:");
-    let result = 0;
+    let result: usize = lines.iter().map(|l| calculate_play(l)).sum();
 
     println!("\tresult: {}", result);
     let duration = start.elapsed();

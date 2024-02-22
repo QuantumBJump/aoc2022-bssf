@@ -11,6 +11,7 @@ pub fn execute(input_type: &str) -> Result<(), Box<dyn error::Error>> {
     let lines = utils::read_lines(&filename)?;
     part1(lines.clone())?;
     part1_improved(lines.clone())?;
+    part1_map(lines.clone())?;
     Ok(())
 }
 
@@ -52,3 +53,19 @@ fn part1_improved(lines: Vec<String>) -> Result<(), Box<dyn error::Error>> {
     println!("\tTime elapsed: {:?}", duration);
     Ok(())
 }
+
+fn part1_map(lines: Vec<String>) -> Result<(), Box<dyn error::Error>> {
+    let start = Instant::now();
+    let mut highest = 0;
+    for bag in lines.split(|s| s == "") {
+        let bag_total: usize = bag.into_iter()
+                .map(|line| line.parse::<usize>())
+                .sum::<Result<_, _>>()?;
+        highest = cmp::max(bag_total, highest);
+    }
+    println!("\thighest: {}", highest);
+    let duration = start.elapsed();
+    println!("\tTime elapsed: {:?}", duration);
+    Ok(())
+}
+

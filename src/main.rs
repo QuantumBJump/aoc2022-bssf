@@ -78,6 +78,6 @@ fn main() {
 fn determine_day(day_arg: &str) -> u8 {
     match day_arg.parse::<u8>() {
         Ok(res) => res,
-        Err(e) => panic!("Failed to parse {day_arg}: {e}")
+        Err(e) => panic!("Failed to parse {day_arg}: {e}"),
     }
 }

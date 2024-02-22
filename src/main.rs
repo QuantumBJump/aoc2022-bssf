@@ -2,7 +2,7 @@ use std::env;
 mod utils;
 
 mod day01;
-// mod day02;
+mod day02;
 // mod day03;
 // mod day04;
 // mod day05;
@@ -44,30 +44,30 @@ fn main() {
     println!("Day {}, data: {}", day, input_arg);
     let result = match day {
         1 => day01::execute(input_arg),
-        // 2 => day01::execute(),
-        // 3 => day01::execute(),
-        // 4 => day01::execute(),
-        // 5 => day01::execute(),
-        // 6 => day01::execute(),
-        // 7 => day01::execute(),
-        // 8 => day01::execute(),
-        // 9 => day01::execute(),
-        // 10 => day01::execute(),
-        // 11 => day01::execute(),
-        // 12 => day01::execute(),
-        // 13 => day01::execute(),
-        // 14 => day01::execute(),
-        // 15 => day01::execute(),
-        // 16 => day01::execute(),
-        // 17 => day01::execute(),
-        // 18 => day01::execute(),
-        // 19 => day01::execute(),
-        // 20 => day01::execute(),
-        // 21 => day01::execute(),
-        // 22 => day01::execute(),
-        // 23 => day01::execute(),
-        // 24 => day01::execute(),
-        // 25 => day01::execute(),
+        2 => day02::execute(input_arg),
+        // 3 => day03::execute(input_arg),
+        // 4 => day04::execute(input_arg),
+        // 5 => day05::execute(input_arg),
+        // 6 => day06::execute(input_arg),
+        // 7 => day07::execute(input_arg),
+        // 8 => day08::execute(input_arg),
+        // 9 => day09::execute(input_arg),
+        // 10 => day10::execute(input_arg),
+        // 11 => day11::execute(input_arg),
+        // 12 => day12::execute(input_arg),
+        // 13 => day13::execute(input_arg),
+        // 14 => day14::execute(input_arg),
+        // 15 => day15::execute(input_arg),
+        // 16 => day16::execute(input_arg),
+        // 17 => day17::execute(input_arg),
+        // 18 => day18::execute(input_arg),
+        // 19 => day19::execute(input_arg),
+        // 20 => day20::execute(input_arg),
+        // 21 => day21::execute(input_arg),
+        // 22 => day22::execute(input_arg),
+        // 23 => day23::execute(input_arg),
+        // 24 => day24::execute(input_arg),
+        // 25 => day25::execute(input_arg),
         _ => panic!("day {day} does not exist (yet)!"),
     };
     if let Err(blah) = result {

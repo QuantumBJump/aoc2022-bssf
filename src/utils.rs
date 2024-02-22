@@ -9,9 +9,9 @@ pub fn read_lines(filename: &str) -> Result<Vec<String>, io::Error> {
 }
 
 pub fn get_input_path(input_type: &str, day: u8) -> String {
-    let day_string = day.to_string();
+    let mut day_string = day.to_string();
     if day_string.len() == 1 {
-        "0".to_owned().push_str(&day_string);
+        day_string = format!("0{}", day_string);
     }
     let dir = match input_type {
         "test" => "test_input",

@@ -29,7 +29,6 @@ mod day01;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
-    dbg!(&args);
     let day_arg: &str;
     let input_arg: &str;
 
